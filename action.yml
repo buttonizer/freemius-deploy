@@ -1,40 +1,40 @@
 name: "Deploy on Freemius"
 description: "Isn't it obvious?"
-inputs:
-  pubKey:
-    description: 'Public key'
-    required: true
-  userId:
-    description: 'Eye color of the Octocats'
-    required: true
-  secretKey:
-    description: 'Secret Key'
-    required: true
-  pluginSlug:
-    description: 'Plugin slug'
-    required: false
-    default: 'buttonizer-multifunctional-button'
-  pluginId:
-    description: 'Plugin ID'
-    required: true
-  sandbox:
-    description: 'Sandbox mode'
-    required: false
-    default: false
-  file:
-    description: 'file to deploy'
-    required: true
-  version:
-    description: 'tag version'
-    required: true
-  releaseMode:
-    description: 'release mode'
-    required: false
-    default: 'pending'
+# inputs:
+#   pubKey:
+#     description: 'Public key'
+#     required: true
+#   userId:
+#     description: 'Eye color of the Octocats'
+#     required: true
+#   secretKey:
+#     description: 'Secret Key'
+#     required: true
+#   pluginSlug:
+#     description: 'Plugin slug'
+#     required: false
+#     default: 'buttonizer-multifunctional-button'
+#   pluginId:
+#     description: 'Plugin ID'
+#     required: true
+#   sandbox:
+#     description: 'Sandbox mode'
+#     required: false
+#     default: false
+#   file:
+#     description: 'file to deploy'
+#     required: true
+#   version:
+#     description: 'tag version'
+#     required: true
+#   releaseMode:
+#     description: 'release mode'
+#     required: false
+#     default: 'pending'
 steps:
   - uses: nanasess/setup-php@master
     with:
       php-version: '7.4'
   - run: |
       echo "- Deploy process started"
-      php ./deploy.php "${{ env.INPUT_USERID }}" "${{ env.INPUT_PUBKEY }}" "${{ env.INPUT_SECRETKEY }}" "${{ env.INPUT_PLUGINSLUG }}" "${{ env.INPUT_PLUGINID }}" "${{ env.INPUT_SANDBOX }}" "${{ env.INPUT_VERSION }}" --release "${{ env.INPUT_RELEASEMODE }}"
+      php ./deploy.php "${{ env.USER_ID }}" "${{ env.PUB_KEY }}" "${{ env.SECRET_KEY }}" "${{ env.PLUGIN_SLUG }}" "${{ env.PLUGIN_ID }}" "${{ env.SANDBOX }}" "${{ env.VERSION }}" --release "${{ env.RELEASE_MODE }}"
