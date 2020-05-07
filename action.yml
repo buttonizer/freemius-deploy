@@ -1,0 +1,34 @@
+name: "Deploy on Freemius"
+description: "Isn't it obvious?"
+inputs:
+  pubKey:
+    description: 'Public key'
+    required: true
+  userId:
+    description: 'Eye color of the Octocats'
+    required: true
+  secretKey:
+    description: 'Secret Key'
+    required: true
+  pluginSlug:
+    description: 'Plugin slug'
+    required: false
+    default: 'buttonizer-multifunctional-button'
+  pluginId:
+    description: 'Plugin ID'
+    required: true
+  sandbox:
+    description: 'Sandbox mode'
+    required: false
+    default: false
+  file:
+    description: 'file to deploy'
+    required: true
+  version:
+    description: 'tag version'
+    required: true
+run: |
+  echo "- Deploy process started"
+  php "$wsd"/deploy.php "${{ INPUTS_USERID }}" "${{ INPUTS_PUBKEY }}" "${{ INPUTS_SECRETKEY }}" "${{ INPUTS_PLUGINSLUG }}" "${{ INPUTS_PLUGINID }}" "${{ INPUTS_SANDBOX }}" "${{ INPUTS_VERSION }}"
+env:
+  CI: true
