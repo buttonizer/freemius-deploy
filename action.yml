@@ -27,7 +27,6 @@ description: "Isn't it obvious?"
 #   version:
 #     description: 'tag version'
 #     required: true
-#   releaseMode:
 #     description: 'release mode'
 #     required: false
 #     default: 'pending'
@@ -37,4 +36,4 @@ steps:
       php-version: '7.4'
   - run: |
       echo "- Deploy process started"
-      php ./deploy.php "${{ env.USER_ID }}" "${{ env.PUB_KEY }}" "${{ env.SECRET_KEY }}" "${{ env.PLUGIN_SLUG }}" "${{ env.PLUGIN_ID }}" "${{ env.SANDBOX }}" "${{ env.VERSION }}" --release "${{ env.RELEASE_MODE }}"
+      php ./deploy.php
