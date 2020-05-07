@@ -27,8 +27,14 @@ inputs:
   version:
     description: 'tag version'
     required: true
-run: |
-  echo "- Deploy process started"
-  php "$wsd"/deploy.php "${{ INPUTS_USERID }}" "${{ INPUTS_PUBKEY }}" "${{ INPUTS_SECRETKEY }}" "${{ INPUTS_PLUGINSLUG }}" "${{ INPUTS_PLUGINID }}" "${{ INPUTS_SANDBOX }}" "${{ INPUTS_VERSION }}"
-env:
-  CI: true
+  releaseMode:
+    description: 'release mode'
+    required: false
+    default: 'pending'
+steps:
+  - uses: nanasess/setup-php@master
+    with:
+      php-version: '7.4'
+  - run: |
+      echo "- Deploy process started"
+      php "$wsd"/deploy.php "${{ INPUTS_USERID }}" "${{ INPUTS_PUBKEY }}" "${{ INPUTS_SECRETKEY }}" "${{ INPUTS_PLUGINSLUG }}" "${{ INPUTS_PLUGINID }}" "${{ INPUTS_SANDBOX }}" "${{ INPUTS_VERSION }}" --release "${{ INPUTS_RELEASEMODE }}"

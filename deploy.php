@@ -3,7 +3,7 @@
     require_once 'freemius-php-api/freemius/Freemius.php';
 
 	$sandbox      = ( $argv[6] === 'true' );
-	$release_mode = ! isset( $argv[8] ) || empty( $argv[8] ) ? 'released' :  $argv[8];
+	$release_mode = ! isset( $argv[8] ) || empty( $argv[8] ) ? 'pending' :  $argv[8];
 	define( 'FS__API_SCOPE', 'developer' );
 	define( 'FS__API_DEV_ID', $argv[1] );
 	define( 'FS__API_PUBLIC_KEY', $argv[2] );
