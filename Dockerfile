@@ -11,4 +11,4 @@ COPY freemius-php-api /freemius-php-api
 EXPOSE 80/tcp
 EXPOSE 80/udp
 
-RUN php ./deploy.php ${file_name} ${version} ${sandbox} ${release_mode}
+CMD php ./deploy.php ${file_name} ${version} ${sandbox} ${release_mode}
