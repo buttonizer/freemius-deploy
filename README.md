@@ -1,11 +1,11 @@
 # Freemius Deploy
 
-This Github Action deploys a plugin on Freemius. It uses the [Freemius PHP SDK](https://github.com/Freemius/freemius-php-sdk.git) and uses some of the functionality of [CodeAtCode/freemius-suite](https://github.com/CodeAtCode/freemius-suite)
+This Github Action deploys your wordpress plugin on Freemius. It uses the [Freemius PHP SDK](https://github.com/Freemius/freemius-php-sdk.git) and uses some of the functionality of [CodeAtCode/freemius-suite](https://github.com/CodeAtCode/freemius-suite)
 
 ## Arguments
 | Argument       | Required | Function                                                                                                                                                                                                                                                                                        | Default |
 | -------------- | -------- | ------- | ------- |
-| `file_name`    | Yes      | File name of the to be uploaded plugin (zip extension).  _Note: the file has to be in the root folder of your repository_                                                                                                                                                                                                                                                      |         |
+| `file_name`    | Yes      | File name of the to be uploaded wordpress plugin (zip extension).  _Note: the file has to be in the root folder of your repository_                                                                                                                                                                                                                                                      |         |
 | `release_mode` | No       | `pending`, `beta`, or `released`. Set to beta to release the product to valid license holders that opted into the beta list. Set to released to release it to all valid license holders. When the product is released, it will be available for download right within the WP Admin dashboard. | `pending` |
 | `version` | Yes | This is used to check whether the release is already uploaded. **Action will fail if the release has already been uploaded** | |
 | `sandbox` | No | Whether to upload in sandbox mode | `false` |
