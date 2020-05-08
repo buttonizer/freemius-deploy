@@ -1,5 +1,5 @@
 name: "Deploy on Freemius"
-description: "Isn't it obvious?"
+description: "Uploads and deploys your plugin on Freemius"
 inputs:
   # pubKey:
   #   description: 'Public key'
