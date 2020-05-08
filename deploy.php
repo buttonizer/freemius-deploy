@@ -1,6 +1,6 @@
 <?php
     // run as: php /deploy.php $file_name $version $sandbox $release_mode
-    // with env vars: USER_ID, PUBLIC_KEY, SECRET_KEY, PLUGIN_SLUG
+    // with env vars: USER_ID, PUBLIC_KEY, SECRET_KEY, PLUGIN_SLUG, PLUGIN_ID
     $file_name = $_ENV['INPUT_FILE_NAME'];
     $version = $_ENV['INPUT_VERSION'];
     $sandbox = ($_ENV['INPUT_SANDBOX'] === 'true' );
@@ -27,14 +27,17 @@
             die();
         }
 
-        $deploy = $api->Api('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags.json');
+        $deploy = $api->Api('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags.json', 'GET', array(
+            'plugin_id' => $_ENV['PLUGIN_ID']
+        ));
         if ( $deploy->tags[0]->version === $version ) {
                 $deploy = $deploy->tags[0];
                 echo '-Package already deployed on Freemius'."\n";
         } else {
             // Upload the zip
             $deploy = $api->Api('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags.json', 'POST', array(
-                'add_contributor' => false
+                'add_contributor' => false,
+                'plugin_id' => $_ENV['PLUGIN_ID']
             ), array(
                 'file' => $file_name
             ));
@@ -47,7 +50,8 @@
             echo "- Deploy done on Freemius\n";
 
             $is_released = $api->Api('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.json', 'PUT', array(
-                'release_mode' => $release_mode
+                'release_mode' => $release_mode,
+                'plugin_id' => $_ENV['PLUGIN_ID']
             ), array());
 
             echo "- Set as released on Freemius\n";
