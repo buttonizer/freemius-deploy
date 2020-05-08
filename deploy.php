@@ -1,8 +1,8 @@
 <?php
-    // run as: php ./deploy.php $file_name $version $sandbox $release_mode
+    // run as: php /deploy.php $file_name $version $sandbox $release_mode
     // with env vars: USER_ID, PUBLIC_KEY, SECRET_KEY, PLUGIN_SLUG
     echo "\n- Deploying " . $_ENV['PLUGIN_SLUG'] . " to Freemius, with arguments: ";
-    echo "\n- file_name: " . $file_name . " version: " . $version . " sandbox: " . $version . " release_mode: " . $release_mode;
+    echo "\n- file_name: " . $argv[1] . " version: " . $argv[2] . " sandbox: " . $argv[3] . " release_mode: " . $argv[4];
 
     require_once 'freemius-php-api/freemius/FreemiusBase.php';
     require_once 'freemius-php-api/freemius/Freemius.php';
