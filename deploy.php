@@ -9,8 +9,8 @@
     echo "\n- Deploying " . $_ENV['PLUGIN_SLUG'] . " to Freemius, with arguments: ";
     echo "\n- file_name: " . $file_name . " version: " . $version . " sandbox: " . $sandbox . " release_mode: " . $release_mode;
 
-    require_once 'freemius-php-api/freemius/FreemiusBase.php';
-    require_once 'freemius-php-api/freemius/Freemius.php';
+    require_once '/freemius-php-api/freemius/FreemiusBase.php';
+    require_once '/freemius-php-api/freemius/Freemius.php';
 	define( 'FS__API_SCOPE', 'developer' );
 	define( 'FS__API_DEV_ID', $_ENV['DEV_ID'] );
 	define( 'FS__API_PUBLIC_KEY', $_ENV['PUBLIC_KEY'] );
