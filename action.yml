@@ -1,39 +1,36 @@
 name: "Deploy on Freemius"
 description: "Isn't it obvious?"
-# inputs:
-#   pubKey:
-#     description: 'Public key'
-#     required: true
-#   userId:
-#     description: 'Eye color of the Octocats'
-#     required: true
-#   secretKey:
-#     description: 'Secret Key'
-#     required: true
-#   pluginSlug:
-#     description: 'Plugin slug'
-#     required: false
-#     default: 'buttonizer-multifunctional-button'
-#   pluginId:
-#     description: 'Plugin ID'
-#     required: true
-#   sandbox:
-#     description: 'Sandbox mode'
-#     required: false
-#     default: false
-#   file:
-#     description: 'file to deploy'
-#     required: true
-#   version:
-#     description: 'tag version'
-#     required: true
-#     description: 'release mode'
-#     required: false
-#     default: 'pending'
-steps:
-  - uses: nanasess/setup-php@master
-    with:
-      php-version: '7.4'
-  - run: |
-      echo "- Deploy process started"
-      php ./deploy.php
+inputs:
+  # pubKey:
+  #   description: 'Public key'
+  #   required: true
+  # userId:
+  #   description: 'Eye color of the Octocats'
+  #   required: true
+  # secretKey:
+  #   description: 'Secret Key'
+  #   required: true
+  # pluginSlug:
+  #   description: 'Plugin slug'
+  #   required: false
+  #   default: 'buttonizer-multifunctional-button'
+  # pluginId:
+  #   description: 'Plugin ID'
+  #   required: true
+  sandbox:
+    description: 'Sandbox mode'
+    required: false
+    default: false
+  fileName:
+    description: 'file to deploy'
+    required: true
+  version:
+    description: 'tag version'
+    required: true
+  releaseMode:
+    description: 'release mode'
+    required: false
+    default: 'pending'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

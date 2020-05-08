@@ -1,13 +1,16 @@
 <?php
+    // run as: php ./deploy.php $file_name $version $sandbox $release_mode
+    // with env vars: USER_ID, PUBLIC_KEY, SECRET_KEY, PLUGIN_SLUG
+    echo $_ENV['PLUGIN_SLUG'];
+
     require_once 'freemius-php-api/freemius/FreemiusBase.php';
     require_once 'freemius-php-api/freemius/Freemius.php';
-  echo $_ENV['PUB_KEY'];
-	$sandbox      = ( $_ENV['SANDBOX'] === 'true' );
-	$release_mode = ! isset( $_ENV['RELEASE_MODE'] ) || empty( $argv[8] ) ? 'pending' :  $argv[8];
+	$sandbox      = ( $argv[3] === 'true' );
+	$release_mode = ! isset( $argv[4] ) || empty( $argv[4] ) ? 'pending' :  $argv[4];
 	define( 'FS__API_SCOPE', 'developer' );
-	define( 'FS__API_DEV_ID', $argv[1] );
-	define( 'FS__API_PUBLIC_KEY', $argv[2] );
-	define( 'FS__API_SECRET_KEY', $argv[3] );
+	define( 'FS__API_DEV_ID', $_ENV['DEV_ID'] );
+	define( 'FS__API_PUBLIC_KEY', $_ENV['PUBLIC_KEY'] );
+	define( 'FS__API_SECRET_KEY', $_ENV['SECRET_KEY'] );
 
     echo "\n- Deploy in progress on Freemius\n";
 
@@ -20,16 +23,16 @@
             die();
         }
 
-        $deploy = $api->Api('plugins/'.$argv[5].'/tags.json');
-        if ( $deploy->tags[0]->version === $argv[6] ) {
+        $deploy = $api->Api('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags.json');
+        if ( $deploy->tags[0]->version === $argv[2] ) {
                 $deploy = $deploy->tags[0];
                 echo '-Package already deployed on Freemius'."\n";
         } else {
             // Upload the zip
-            $deploy = $api->Api('plugins/'.$argv[5].'/tags.json', 'POST', array(
+            $deploy = $api->Api('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags.json', 'POST', array(
                 'add_contributor' => false
             ), array(
-                'file' => $argv[4]
+                'file' => $argv[1]
             ));
 
             if (!property_exists($deploy, 'id')) {
@@ -39,7 +42,7 @@
 
             echo "- Deploy done on Freemius\n";
 
-            $is_released = $api->Api('plugins/'.$argv[5].'/tags/'.$deploy->id.'.json', 'PUT', array(
+            $is_released = $api->Api('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.json', 'PUT', array(
                 'release_mode' => $release_mode
             ), array());
 
@@ -49,10 +52,10 @@
         echo "- Download Freemius free version\n";
         
         // Generate url to download the zip
-        $zip = $api->GetSignedUrl('plugins/'.$argv[5].'/tags/'.$deploy->id.'.zip');
+        $zip = $api->GetSignedUrl('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.zip');
 
-        $path = pathinfo($argv[4]);
-        $newzipname = $path['dirname'] . '/' . basename($argv[4], '.zip');
+        $path = pathinfo($argv[1]);
+        $newzipname = $path['dirname'] . '/' . basename($argv[1], '.zip');
         $newzipname .= '__free.zip';
 
         file_put_contents($newzipname,file_get_contents($zip));
