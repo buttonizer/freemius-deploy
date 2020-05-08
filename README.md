@@ -1,7 +1,6 @@
 # Freemius Deploy
 
-This Github Action deploys a plugin on Freemius. It uses the [Freemius PHP SDK](https://github.com/Freemius/freemius-php-sdk.git)
-
+This Github Action deploys a plugin on Freemius. It uses the [Freemius PHP SDK](https://github.com/Freemius/freemius-php-sdk.git) and uses some of the functionality of [CodeAtCode/freemius-suite](https://github.com/CodeAtCode/freemius-suite)
 
 ## Arguments
 | Argument       | Required | Function                                                                                                                                                                                                                                                                                        | Default |
@@ -30,7 +29,7 @@ _Tip: store these variables in your [secrets](https://help.github.com/en/actions
   uses: buttonizer/freemius-deploy@master
   with:
     file_name: my_wordpress_plugin.zip
-    release_mode: [pending
+    release_mode: pending
     version: 1.1.0
     sandbox: false
   env:
