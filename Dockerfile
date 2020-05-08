@@ -6,7 +6,7 @@ ARG sandbox
 ARG release_mode
 
 COPY deploy.php /deploy.php
-COPY freemius-php-api /freemius-php-api
+RUN git clone git@github.com:Freemius/php-sdk.git /freemius-php-api
 
 EXPOSE 80/tcp
 EXPOSE 80/udp
