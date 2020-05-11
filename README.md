@@ -26,7 +26,7 @@ _Tip: store these variables in your [secrets](https://help.github.com/en/actions
 ## Example
 ```
 - name: Deploy to Freemius
-  uses: buttonizer/freemius-deploy@master
+  uses: buttonizer/freemius-deploy@v0.1.0
   with:
     file_name: my_wordpress_plugin.zip
     release_mode: pending
