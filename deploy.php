@@ -58,10 +58,9 @@
         }
 
         echo "- Download Freemius free version\n";
-        
-        // Generate url to download the zip
-        $zip = $api->GetSignedUrl('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.zip');
 
+        // Generate url to download the zip
+        $zip = $api->GetSignedUrl('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.zip?plugin_id='.$_ENV['PLUGIN_ID'], array());
         $path = pathinfo($file_name);
         $newzipname = $path['dirname'] . '/' . basename($file_name, '.zip');
         $newzipname .= '__free.zip';
