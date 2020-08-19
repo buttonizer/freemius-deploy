@@ -23,10 +23,18 @@ All these are found in your Freemius dashboard.
 
 _Tip: store these variables in your [secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)_
 
+## Action outputs (since v0.1.1)
+
+The action downloads both the **free** and **pro** version and outputs their filenames as outputs:
+- free_version
+- pro_version
+
+You can access these by setting an **id** to your workflow step. Consequently you can upload these as artifacts, or upload them to the wordpress svn repository, for example with [yukihiko-shinoda/action-deploy-wordpress-plugin](https://github.com/yukihiko-shinoda/action-deploy-wordpress-plugin).
+
 ## Example
 ```
 - name: Deploy to Freemius
-  uses: buttonizer/freemius-deploy@v0.1.0
+  uses: buttonizer/freemius-deploy@v0.1.1
   with:
     file_name: my_wordpress_plugin.zip
     release_mode: pending
