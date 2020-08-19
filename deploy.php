@@ -66,8 +66,9 @@
         $newzipname .= '__free.zip';
 
         file_put_contents($newzipname,file_get_contents($zip));
-        
-        echo "- Downloaded Freemius free version\n";
+
+        echo "- Downloaded Freemius free version to ".$newzipname."\n";
+        echo "::set-output name=free_version::" . $newzipname;
     }
     catch (Exception $e) {
         echo "- Freemius server has problems\n";

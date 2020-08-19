@@ -17,4 +17,4 @@ RUN git clone https://github.com/Freemius/freemius-php-sdk.git /freemius-php-api
 EXPOSE 80/tcp
 EXPOSE 80/udp
 
-CMD php /deploy.php ${file_name} ${version} ${sandbox} ${release_mode}
+CMD php /deploy.php
