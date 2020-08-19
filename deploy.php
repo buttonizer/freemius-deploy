@@ -68,7 +68,7 @@
         file_put_contents($zipname_free,file_get_contents($zip_free));
 
         echo "- Downloaded Freemius free version to ".$zipname_free."\n";
-        echo "::set-output name=free_version::" . $zipname_free;
+        echo "::set-output name=free_version::" . $zipname_free . "\n";
 
         // Generate url to download the pro zip
         $zip_pro = $api->GetSignedUrl('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.zip?is_premium=true&plugin_id='.$_ENV['PLUGIN_ID'], array());
@@ -79,7 +79,7 @@
         file_put_contents($zipname_pro,file_get_contents($zip_pro));
 
         echo "- Downloaded Freemius pro version to ".$zipname_pro."\n";
-        echo "::set-output name=pro_version::" . $zipname_pro;
+        echo "::set-output name=pro_version::" . $zipname_pro . "\n";
     }
     catch (Exception $e) {
         echo "- Freemius server has problems\n";
