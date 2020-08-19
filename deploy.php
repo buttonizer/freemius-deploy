@@ -60,15 +60,26 @@
         echo "- Download Freemius free version\n";
 
         // Generate url to download the zip
-        $zip = $api->GetSignedUrl('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.zip?plugin_id='.$_ENV['PLUGIN_ID'], array());
+        $zip_free = $api->GetSignedUrl('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.zip?plugin_id='.$_ENV['PLUGIN_ID'], array());
         $path = pathinfo($file_name);
-        $newzipname = $path['dirname'] . '/' . basename($file_name, '.zip');
-        $newzipname .= '__free.zip';
+        $zipname_free = $path['dirname'] . '/' . basename($file_name, '.zip');
+        $zipname_free .= '__free.zip';
 
-        file_put_contents($newzipname,file_get_contents($zip));
+        file_put_contents($zipname_free,file_get_contents($zip_free));
 
-        echo "- Downloaded Freemius free version to ".$newzipname."\n";
-        echo "::set-output name=free_version::" . $newzipname;
+        echo "- Downloaded Freemius free version to ".$zipname_free."\n";
+        echo "::set-output name=free_version::" . $zipname_free;
+
+        // Generate url to download the pro zip
+        $zip_pro = $api->GetSignedUrl('plugins/'.$_ENV['PLUGIN_SLUG'].'/tags/'.$deploy->id.'.zip?is_premium=true&plugin_id='.$_ENV['PLUGIN_ID'], array());
+        $path = pathinfo($file_name);
+        $zipname_pro = $path['dirname'] . '/' . basename($file_name, '.zip');
+        $zipname_pro .= '.zip';
+
+        file_put_contents($zipname_pro,file_get_contents($zip_pro));
+
+        echo "- Downloaded Freemius pro version to ".$zipname_pro."\n";
+        echo "::set-output name=pro_version::" . $zipname_pro;
     }
     catch (Exception $e) {
         echo "- Freemius server has problems\n";

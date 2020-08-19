@@ -34,6 +34,8 @@ inputs:
 outputs:
   free_version:
     description: 'The Free version file'
+  pro_version:
+    description: 'The Pro version file'
 runs:
   using: 'docker'
   image: 'Dockerfile'
