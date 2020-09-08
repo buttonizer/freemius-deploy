@@ -4,7 +4,7 @@
     $file_name = $_ENV['INPUT_FILE_NAME'];
     $version = $_ENV['INPUT_VERSION'];
     $sandbox = ($_ENV['INPUT_SANDBOX'] === 'true' );
-    $release_mode = ! isset( $_ENV['INPUT_RELEASEMODE'] ) || empty( $_ENV['INPUT_RELEASEMODE'] ) ? 'pending' :  $_ENV['INPUT_RELEASEMODE'];
+    $release_mode = ! isset( $_ENV['INPUT_RELEASE_MODE'] ) || empty( $_ENV['INPUT_RELEASE_MODE'] ) ? 'pending' :  $_ENV['INPUT_RELEASE_MODE'];
 
     echo "\n- Deploying " . $_ENV['PLUGIN_SLUG'] . " to Freemius, with arguments: ";
     echo "\n- file_name: " . $file_name . " version: " . $version . " sandbox: " . $sandbox . " release_mode: " . $release_mode;

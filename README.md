@@ -3,6 +3,7 @@
 This Github Action deploys your wordpress plugin on Freemius. It uses the [Freemius PHP SDK](https://github.com/Freemius/freemius-php-sdk.git) and uses some of the functionality of [CodeAtCode/freemius-suite](https://github.com/CodeAtCode/freemius-suite)
 
 ## Arguments
+
 | Argument       | Required | Function                                                                                                                                                                                                                                                                                        | Default |
 | -------------- | -------- | ------- | ------- |
 | `file_name`    | Yes      | File name of the to be uploaded wordpress plugin (zip extension).  _Note: the file has to be in the root folder of your repository_                                                                                                                                                                                                                                                      |         |
@@ -13,6 +14,7 @@ This Github Action deploys your wordpress plugin on Freemius. It uses the [Freem
 ## Environment variables
 
 **Required**:
+
 - `PUBLIC_KEY`
 - `DEV_ID`
 - `SECRET_KEY`
@@ -26,13 +28,15 @@ _Tip: store these variables in your [secrets](https://help.github.com/en/actions
 ## Action outputs (since v0.1.1)
 
 The action downloads both the **free** and **pro** version and outputs their filenames as outputs:
+
 - free_version
 - pro_version
 
 You can access these by setting an **id** to your workflow step. Consequently you can upload these as artifacts, or upload them to the wordpress svn repository, for example with [yukihiko-shinoda/action-deploy-wordpress-plugin](https://github.com/yukihiko-shinoda/action-deploy-wordpress-plugin).
 
 ## Example
-```
+
+```yml
 - name: Deploy to Freemius
   uses: buttonizer/freemius-deploy@v0.1.1
   with:

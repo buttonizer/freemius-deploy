@@ -1,33 +1,17 @@
 name: "Deploy on Freemius"
 description: "Uploads and deploys your plugin on Freemius"
 inputs:
-  # pubKey:
-  #   description: 'Public key'
-  #   required: true
-  # userId:
-  #   description: 'Eye color of the Octocats'
-  #   required: true
-  # secretKey:
-  #   description: 'Secret Key'
-  #   required: true
-  # pluginSlug:
-  #   description: 'Plugin slug'
-  #   required: false
-  #   default: 'buttonizer-multifunctional-button'
-  # pluginId:
-  #   description: 'Plugin ID'
-  #   required: true
   sandbox:
     description: 'Sandbox mode'
     required: false
     default: false
-  fileName:
+  file_name:
     description: 'file to deploy'
     required: true
   version:
     description: 'tag version'
     required: true
-  releaseMode:
+  release_mode:
     description: 'release mode'
     required: false
     default: 'pending'
