@@ -38,7 +38,7 @@ You can access these by setting an **id** to your workflow step. Consequently yo
 
 ```yml
 - name: Deploy to Freemius
-  uses: buttonizer/freemius-deploy@v0.1.1
+  uses: buttonizer/freemius-deploy@v0.1.2
   with:
     file_name: my_wordpress_plugin.zip
     release_mode: pending
