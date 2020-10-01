@@ -79,7 +79,7 @@
         file_put_contents($zipname_pro,file_get_contents($zip_pro));
 
         echo "- Downloaded Freemius pro version to ".$zipname_pro."\n";
-        echo "::set-output name=pro_version::" . $zipname_pro . "\n";
+        echo "::set-output name=premium_version::" . $zipname_pro . "\n";
     }
     catch (Exception $e) {
         echo "- Freemius server has problems\n";
