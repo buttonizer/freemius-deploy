@@ -34,6 +34,14 @@ inputs:
     description: 'overwrite a tag with the same version, otherwise skips upload'
     default: 'false'
     required: false
+  download_free:
+    description: 'should the action download the free version after deployment'
+    required: false
+    default: 'true'
+  download_premium:
+    description: 'should the action download the premium version after deployment'
+    required: false
+    default: 'true'
 
 outputs:
   free_version:

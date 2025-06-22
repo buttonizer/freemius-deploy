@@ -17,6 +17,8 @@ updates that clean up the code and allow for more customization.
 | `add_contributor`   | No       | Add Freemius as a contributor to the plugin. `True` or `false`.                                                                                                                                                                                                                               | `false`   |
 | `fail_on_duplicate` | No       | If the action should fail if the version already exisits on Freemius.                                                                                                                                                                                                                         | `true`    |
 | `overwrite`         | No       | Overwrite a tag with the same version, otherwise skips upload and continues with the rest of the action. `True` or `false`.                                                                                                                                                                   | `false`   |
+| `download_free`     | No       | Controls whether or not to download the free version as part of the action.                                                                                                                                                                                                                   | `true`    |
+| `download_premium`  | No       | Controls whether or not to download the premium version as part of the action.                                                                                                                                                                                                                | `true`    |
 
 ## Environment variables
 
@@ -40,7 +42,7 @@ page or in the SDK integration snippet.
 
 ## Action outputs (since v0.1.1)
 
-The action downloads both the **free** and **pro** versions and outputs their filenames as outputs:
+The action by default downloads both the **free** and **pro** versions and outputs their filenames as outputs:
 
 - free_version
 - pro_version

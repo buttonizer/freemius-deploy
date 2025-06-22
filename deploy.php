@@ -36,6 +36,8 @@ $is_incremental = ($_ENV['INPUT_IS_INCREMENTAL'] === 'true');
 $add_contributor = ($_ENV['INPUT_ADD_CONTRIBUTOR'] === 'true');
 $overwrite = ($_ENV['INPUT_OVERWRITE'] === 'true');
 $fail_on_duplicate = ($_ENV['INPUT_FAIL_ON_DUPLICATE'] === 'true');
+$download_free = ($_ENV['INPUT_DOWNLOAD_FREE'] === 'true');
+$download_premium = ($_ENV['INPUT_DOWNLOAD_PREMIUM'] === 'true');
 
 $debugging = !empty($_ENV['ACTIONS_STEP_DEBUG']) && $_ENV['ACTIONS_STEP_DEBUG'] === 'true';
 
@@ -153,39 +155,48 @@ try {
 
 	echo "- Updated on Freemius with settings " . var_export( $params, true ) . "\n";
 
-	echo "- Downloading Freemius free version\n";
+	if ( $download_free ) {
+		echo "- Downloading Freemius free version\n";
 
-    // Generate url to download the zip
-	$zip_free = $api->GetSignedUrl('plugins/' . $_ENV['PLUGIN_ID'] . '/tags/' . $deploy->id . '.zip');
-    $path = pathinfo($file_name);
-    $zipname_free = $path['dirname'] . '/' . basename($file_name, '.zip');
-    $zipname_free .= '__free.zip';
+		// Generate url to download the zip
+		$zip_free = $api->GetSignedUrl('plugins/' . $_ENV['PLUGIN_ID'] . '/tags/' . $deploy->id . '.zip');
+		$path = pathinfo($file_name);
+		$zipname_free = $path['dirname'] . '/' . basename($file_name, '.zip');
+		$zipname_free .= '__free.zip';
 
-    file_put_contents($zipname_free, file_get_contents($zip_free));
+		file_put_contents($zipname_free, file_get_contents($zip_free));
 
-    if (!file_exists($zipname_free) || filesize($zipname_free) == 0) {
-        echo "Error: Failed to download free version or file is empty\n";
-        exit(1);
-    }
+		if (!file_exists($zipname_free) || filesize($zipname_free) == 0) {
+			echo "Error: Failed to download free version or file is empty\n";
+			exit(1);
+		}
 
-    echo "- Downloaded Freemius free version to " . $zipname_free . "\n";
-    file_put_contents(getenv('GITHUB_OUTPUT'), "free_version=" . $zipname_free . "\n", FILE_APPEND);
+		echo "- Downloaded Freemius free version to " . $zipname_free . "\n";
+		file_put_contents(getenv('GITHUB_OUTPUT'), "free_version=" . $zipname_free . "\n", FILE_APPEND);
+	} elseif ( $debugging ) {
+		echo "::debug:: skipping free version download";
+	}
 
-    // Generate url to download the pro-zip
-	$zip_pro = $api->GetSignedUrl('plugins/' . $_ENV['PLUGIN_ID'] . '/tags/' . $deploy->id . '.zip?is_premium=true');
-    $path = pathinfo($file_name);
-    $zipname_pro = $path['dirname'] . '/' . basename($file_name, '.zip');
-    $zipname_pro .= '__pro.zip';
+	if ( $download_premium ) {
+		echo "- Downloading Freemius premium version\n";
+		// Generate url to download the pro-zip
+		$zip_pro = $api->GetSignedUrl('plugins/' . $_ENV['PLUGIN_ID'] . '/tags/' . $deploy->id . '.zip?is_premium=true');
+		$path = pathinfo($file_name);
+		$zipname_pro = $path['dirname'] . '/' . basename($file_name, '.zip');
+		$zipname_pro .= '__pro.zip';
 
-    file_put_contents($zipname_pro, file_get_contents($zip_pro));
+		file_put_contents($zipname_pro, file_get_contents($zip_pro));
 
-    if (!file_exists($zipname_pro) || filesize($zipname_pro) == 0) {
-        echo "Error: Failed to download pro version or file is empty\n";
-        exit(1);
-    }
+		if (!file_exists($zipname_pro) || filesize($zipname_pro) == 0) {
+			echo "Error: Failed to download pro version or file is empty\n";
+			exit(1);
+		}
 
-    echo "- Downloaded Freemius pro version to " . $zipname_pro . "\n";
-    file_put_contents(getenv('GITHUB_OUTPUT'), "pro_version=" . $zipname_pro . "\n", FILE_APPEND);
+		echo "- Downloaded Freemius pro version to " . $zipname_pro . "\n";
+		file_put_contents(getenv('GITHUB_OUTPUT'), "pro_version=" . $zipname_pro . "\n", FILE_APPEND);
+	} elseif ( $debugging ) {
+		echo "::debug:: skipping premium version download";
+	}
 } catch (Exception $e) {
     // Handle any errors during deployment and provide detailed error information
     // Exit with non-zero status to indicate failure to GitHub Actions
