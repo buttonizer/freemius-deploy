@@ -1,8 +1,9 @@
-FROM php:7.4-cli
+FROM php:8.3-cli
 
 # install git
-RUN apt-get update
-RUN apt-get install -y git
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 
 ARG file_name
